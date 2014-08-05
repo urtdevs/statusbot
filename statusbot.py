@@ -2,6 +2,7 @@
 
 import irc.bot
 import json
+import re
 import socket
 import pyrcon
 import re
@@ -164,7 +165,7 @@ class Pugbot(irc.bot.SingleServerIRCBot):
         sparts = r.split("\n")
 
         players = [p for p in sparts[2:] if p]
-        nplayers = [re.sub("^\^[0-9]", "", player) for player in players]
+        nplayers = [re.sub('\^[0-9-]', '', player) for player in players]
         clanmems = " ".join(players).count(self.clan)
 
         rawvars = sparts[1].split("\\")[1:]
